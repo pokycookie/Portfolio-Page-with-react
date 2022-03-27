@@ -7,10 +7,13 @@ function App() {
       <nav>
         <ul>
           <li>
-            <a href="#">Category1</a>
+            <a href="#">Web Programming</a>
           </li>
           <li>
-            <a href="#">Category2</a>
+            <a href="#">Android</a>
+          </li>
+          <li>
+            <a href="#">Unity</a>
           </li>
           <li>
             <a href="https://pokycookie.tistory.com/" target="_blank">
