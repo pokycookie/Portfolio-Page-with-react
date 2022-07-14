@@ -1,0 +1,28 @@
+@import "reset.scss";
+@import "businessCard.scss";
+
+$color-white: #fdf6ec;
+$color-skyBlue: #b7cadb;
+$color-clearBrown: #f3e9dd;
+$color-darkBrown: #dab88b;
+$color-brown: #e6d5b8;
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: $color-white;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+.App {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 800px;
+}
