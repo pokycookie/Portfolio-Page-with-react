@@ -22,20 +22,36 @@ export function useOffset(ref, options) {
     setIsEnter(false);
   };
 
+  const current = ref && ref.current ? ref.current : null;
+
   useEffect(() => {
-    if (ref && ref.current) {
-      ref.current.addEventListener("mousemove", (e) => {
+    if (ref && current) {
+      current.addEventListener("mousemove", (e) => {
         getOffset(e);
       });
-      ref.current.addEventListener("mouseleave", mouseLeave);
+      current.addEventListener("mouseleave", mouseLeave);
     } else {
       window.addEventListener("mousemove", (e) => {
         getClient(e);
       });
       document.addEventListener("mouseleave", mouseLeave);
     }
+
+    return () => {
+      if (ref && current) {
+        current.removeEventListener("mousemove", (e) => {
+          getOffset(e);
+        });
+        current.removeEventListener("mouseleave", mouseLeave);
+      } else {
+        window.removeEventListener("mousemove", (e) => {
+          getClient(e);
+        });
+        document.removeEventListener("mouseleave", mouseLeave);
+      }
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ref]);
+  }, []);
 
   return isEnter ? { x, y } : false;
 }
@@ -59,7 +75,6 @@ export function useWindows(DOM) {
 
   useEffect(() => {
     handleResize();
-
     window.addEventListener("resize", handleResize);
 
     return () => {

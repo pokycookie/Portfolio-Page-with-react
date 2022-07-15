@@ -1,5 +1,8 @@
 @import "reset.scss";
 @import "businessCard.scss";
+@import "initPage.scss";
+@import "background.scss";
+@import "introduce.scss";
 
 $color-white: #fdf6ec;
 $color-skyBlue: #b7cadb;
@@ -8,9 +11,16 @@ $color-darkBrown: #dab88b;
 $color-brown: #e6d5b8;
 
 body {
-  width: 100vw;
-  height: 100vh;
-  background-color: $color-white;
+  background-color: $color-skyBlue;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+  }
 }
 
 #root {
@@ -19,10 +29,8 @@ body {
 }
 
 .App {
-  width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  perspective: 800px;
+  position: relative;
 }

@@ -1,11 +1,14 @@
-import BusinessCard from "./components/businessCard";
+import { Route, Routes } from "react-router-dom";
+import InitPage from "./pages/initPage";
+import Introduce from "./pages/introduce";
 
 function App() {
   return (
     <div className="App">
-      <BusinessCard>
-        <p>Hello</p>
-      </BusinessCard>
+      <Routes>
+        <Route path="/" element={<InitPage />} />
+        <Route path="/introduce" element={<Introduce />} />
+      </Routes>
     </div>
   );
 }
