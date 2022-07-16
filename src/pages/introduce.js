@@ -22,13 +22,11 @@ export default function Introduce() {
     setSize(result);
   };
   const setScroll = (floor) => {
-    console.log(floor);
     window.scrollTo({
       top: (floor - 1) * 1000 + 10,
       left: 0,
       behavior: "smooth",
     });
-    // setFloor(floor);
   };
 
   useEffect(() => {
@@ -44,7 +42,7 @@ export default function Introduce() {
   return (
     <div
       className="introducePage"
-      style={{ width: size.x, height: SCROLL_LEN * (COLUMN_LEN + 1) }}
+      style={{ width: size.x, height: SCROLL_LEN * COLUMN_LEN }}
     >
       <Column size={size} floor={floor} count={1} className="about">
         <p>About Me</p>
