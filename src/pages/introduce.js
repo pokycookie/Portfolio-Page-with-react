@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import Column from "../components/column";
 import ColumnNav from "../components/columnNav";
+import Hexagon from "../components/hexagon";
 
-const SCROLL_LEN = 1000;
+const SCROLL_LEN = 2000;
 const COLUMN_LEN = 5;
 
 export default function Introduce() {
+  const [scroll, setScroll] = useState(0);
   const [floor, setFloor] = useState(1);
   const [size, setSize] = useState({
     x: window.innerWidth,
@@ -13,17 +15,18 @@ export default function Introduce() {
   });
 
   const onScroll = () => {
-    let tempFloor = Math.ceil(window.pageYOffset / SCROLL_LEN);
+    let tempFloor = Math.ceil(window.scrollY / SCROLL_LEN);
     tempFloor = tempFloor <= 0 ? 1 : tempFloor;
     setFloor(tempFloor);
+    setScroll(window.scrollY);
   };
   const onResize = () => {
     const result = { x: window.innerWidth, y: window.innerHeight };
     setSize(result);
   };
-  const setScroll = (floor) => {
+  const moveScroll = (floor) => {
     window.scrollTo({
-      top: (floor - 1) * 1000 + 10,
+      top: (floor - 1) * SCROLL_LEN + 10,
       left: 0,
       behavior: "smooth",
     });
@@ -42,13 +45,27 @@ export default function Introduce() {
   return (
     <div
       className="introducePage"
-      style={{ width: size.x, height: SCROLL_LEN * COLUMN_LEN }}
+      style={{ width: size.x, height: SCROLL_LEN * (COLUMN_LEN + 1) }}
     >
       <Column size={size} floor={floor} count={1} className="about">
         <p>About Me</p>
       </Column>
-      <Column size={size} floor={floor} count={2} className="">
-        2
+      <Column size={size} floor={floor} count={2} className="skills">
+        <p>Skills</p>
+        <div className="iconArea">
+          <Hexagon
+            size={200}
+            style={
+              scroll > 2000 && scroll < 3000
+                ? {
+                    transform: `rotateY(${100 - (scroll - 2500) * 0.1}deg)`,
+                  }
+                : scroll < 2000
+                ? { transform: "rotateY(100deg)" }
+                : { transform: "rotateY(0deg)" }
+            }
+          />
+        </div>
       </Column>
       <Column size={size} floor={floor} count={3} className="">
         3
@@ -63,7 +80,7 @@ export default function Introduce() {
         count={COLUMN_LEN}
         size={size}
         floor={floor}
-        setScroll={setScroll}
+        moveScroll={moveScroll}
       />
     </div>
   );

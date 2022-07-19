@@ -19,7 +19,7 @@ export default function ColumnNav(props) {
             }
             onClick={() => {
               const floor = index + 1;
-              props.setScroll(floor);
+              props.moveScroll(floor);
             }}
           ></div>
         );
