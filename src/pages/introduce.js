@@ -53,18 +53,18 @@ export default function Introduce() {
       <Column size={size} floor={floor} count={2} className="skills">
         <p>Skills</p>
         <div className="iconArea">
-          <Hexagon
-            size={200}
-            style={
-              scroll > 2000 && scroll < 3000
-                ? {
-                    transform: `rotateY(${100 - (scroll - 2500) * 0.1}deg)`,
-                  }
-                : scroll < 2000
-                ? { transform: "rotateY(100deg)" }
-                : { transform: "rotateY(0deg)" }
-            }
-          />
+          <Hexagon size={200} scroll={scroll} />
+          <Hexagon size={200} scroll={scroll} />
+          <Hexagon size={200} scroll={scroll} />
+          <div className="bottom" style={{ top: 105 }}>
+            <Hexagon size={200} scroll={scroll} />
+            <Hexagon size={200} scroll={scroll} />
+          </div>
+          <div className="bottom" style={{ top: 210 }}>
+            <Hexagon size={200} scroll={scroll} />
+            <Hexagon size={200} scroll={scroll} />
+            <Hexagon size={200} scroll={scroll} />
+          </div>
         </div>
       </Column>
       <Column size={size} floor={floor} count={3} className="">
