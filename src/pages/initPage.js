@@ -9,12 +9,7 @@ export default function InitPage() {
   return (
     <div className="initPage">
       <div className="cardArea">
-        <BusinessCard
-          className="front"
-          isFlip={isFlip}
-          setIsFlip={setIsFlip}
-          reverse={true}
-        >
+        <BusinessCard className="front" isFlip={isFlip} setIsFlip={setIsFlip} reverse={true}>
           <div className="top">
             <p>황세웅</p>
             <p>JavaScript 개발자</p>
@@ -42,7 +37,7 @@ export default function InitPage() {
           <p></p>
         </BusinessCard>
       </div>
-      <Link to="/introduce" className="introBtn">
+      <Link to="/Portfolio-Page-with-react/introduce" className="introBtn">
         START
       </Link>
       <Background />

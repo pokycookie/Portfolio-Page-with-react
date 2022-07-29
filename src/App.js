@@ -6,8 +6,8 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<InitPage />} />
-        <Route path="/introduce" element={<Introduce />} />
+        <Route path="/Portfolio-Page-with-react" element={<InitPage />} />
+        <Route path="/Portfolio-Page-with-react/introduce" element={<Introduce />} />
       </Routes>
     </div>
   );
