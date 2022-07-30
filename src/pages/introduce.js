@@ -11,6 +11,7 @@ import IMG_NODE from "../img/node.png";
 import IMG_GIT from "../img/git.png";
 import IMG_TS from "../img/ts.png";
 import IMG_MONGODB from "../img/mongodb.png";
+import EmptyHexagon from "../components/emptyHexagon";
 
 const SCROLL_LEN = 2000;
 const COLUMN_LEN = 5;
@@ -59,27 +60,23 @@ export default function Introduce() {
       <Column size={size} floor={floor} count={2} className="skills">
         <p>Skills</p>
         <div className="iconArea">
-          <Hexagon
-            size={200}
-            scroll={scroll}
-            src={IMG_HTML}
-            init={SCROLL_LEN * 1 + 600}
-            color="E65100"
-          />
-          <Hexagon
-            size={200}
-            scroll={scroll}
-            src={IMG_JS}
-            init={SCROLL_LEN * 1 + 800}
-            color="FFD600"
-          />
-          <Hexagon
-            size={200}
-            scroll={scroll}
-            src={IMG_NODE}
-            init={SCROLL_LEN * 1 + 1000}
-            color="43853D"
-          />
+          <div className="bottom">
+            <EmptyHexagon size={200} />
+            <Hexagon
+              size={200}
+              scroll={scroll}
+              src={IMG_JS}
+              init={SCROLL_LEN * 1 + 800}
+              color="FFD600"
+            />
+            <Hexagon
+              size={200}
+              scroll={scroll}
+              src={IMG_NODE}
+              init={SCROLL_LEN * 1 + 1000}
+              color="43853D"
+            />
+          </div>
           <div className="bottom" style={{ top: 105 }}>
             <Hexagon
               size={200}
@@ -100,9 +97,9 @@ export default function Introduce() {
             <Hexagon
               size={200}
               scroll={scroll}
-              src={IMG_MONGODB}
-              init={SCROLL_LEN * 1 + 1100}
-              color="023430"
+              src={IMG_HTML}
+              init={SCROLL_LEN * 1 + 600}
+              color="E65100"
             />
             <Hexagon
               size={200}
@@ -117,6 +114,16 @@ export default function Introduce() {
               src={IMG_TS}
               init={SCROLL_LEN * 1 + 1300}
               color="1976D2"
+            />
+          </div>
+          <div className="bottom" style={{ top: 315 }}>
+            <EmptyHexagon size={200} />
+            <Hexagon
+              size={200}
+              scroll={scroll}
+              src={IMG_MONGODB}
+              init={SCROLL_LEN * 1 + 1100}
+              color="023430"
             />
           </div>
         </div>
