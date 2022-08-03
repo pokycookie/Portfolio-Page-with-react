@@ -6,7 +6,9 @@
     overflow: hidden;
 
     svg path {
-        animation: background 3s ;
+        opacity: 0;
+        animation: background 3s;
+        animation-fill-mode: forwards;
     }
     svg path:nth-child(1) { 
         animation-delay: 0s;
@@ -29,13 +31,12 @@
 
      @keyframes background {
         0% {
-            fill: red;
-        }
-        50% {
-            fill: blue;
+            clip-path: circle(0%);
+            opacity: 0;
         }
         100% {
-            fill: green
+            clip-path: circle(100%);
+            opacity: 1;
         }
      }
 }
