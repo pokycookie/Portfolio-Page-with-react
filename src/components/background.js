@@ -7,8 +7,8 @@ export default function Background() {
   return (
     <div className="background">
       <svg width={windows.x} height={windows.y}>
-        <EX1 windows={windows} />
-        <EX2 windows={windows} count={3} complex={10} />
+        {/* <EX1 windows={windows} /> */}
+        <EX2 windows={windows} count={15} complex={30} />
       </svg>
     </div>
   );
@@ -44,47 +44,77 @@ function EX1(props) {
 function EX2(props) {
   const x = props.windows.x;
   const y = props.windows.y;
-  const yOffset = y / 1.5;
-  const waveGap = 100;
-  const contrast = 100;
+  const yOffset = 0;
+  const waveGap = 50;
+  const contrast = 500;
 
   const [waveForm, setWaveForm] = useState([""]);
 
   const getRandomPath = () => {
     const wavePos = [];
+    const assist = [];
     for (let count = 0; count < props.count; count++) {
       wavePos.push([]);
-      wavePos[count].push({ x: 0, y: yOffset + count * waveGap + Math.random() * contrast });
+      assist.push([]);
 
       for (let complex = 0; complex < props.complex; complex++) {
-        const gap = x / props.complex;
-        const max = gap * (complex + 1);
+        const gap = complex === 0 ? 0 : x / props.complex;
+        const max = gap * complex;
         const min = max - gap;
         const xPos = Math.random() * (max - min) + min;
         const yPos = yOffset + count * waveGap + Math.random() * contrast;
-        wavePos[count].push({ x: xPos, y: yPos });
+        wavePos[count].push({ x: Math.floor(xPos), y: Math.floor(yPos) });
+        if (complex > 0) {
+          const prevX = wavePos[count][complex - 1].x || 0;
+          const prevY = wavePos[count][complex - 1].y || 0;
+          const currentX = wavePos[count][complex].x || 0;
+          const currentY = wavePos[count][complex].y || 0;
+          const x12 = prevX + (currentX - prevX) / 2;
+          assist[count].push({
+            x1: Math.floor(x12),
+            y1: Math.floor(prevY),
+            x2: Math.floor(x12),
+            y2: Math.floor(currentY),
+          });
+        }
       }
-      wavePos[count].push({ x, y: yOffset + count * waveGap + Math.random() * contrast });
+      const prevX = wavePos[count][wavePos[count].length - 1].x || 0;
+      const prevY = wavePos[count][wavePos[count].length - 1].y || 0;
+      const currentY = yOffset + count * waveGap + Math.random() * contrast;
+      const x12 = prevX + (x - prevX) / 2;
+      assist[count].push({
+        x1: Math.floor(x12),
+        y1: Math.floor(prevY),
+        x2: Math.floor(x12),
+        y2: Math.floor(currentY),
+      });
+      wavePos[count].push({ x: Math.floor(x), y: Math.floor(currentY) });
     }
-    pathConcat(wavePos);
+    pathConcat(wavePos, assist);
+    console.log(assist);
+    console.log(wavePos);
   };
 
   useEffect(() => {
     getRandomPath();
   }, [props]);
 
-  const pathConcat = (wavePos) => {
+  const pathConcat = (wavePos, assist) => {
     const tempArr = [...waveForm];
     for (let count = 0; count < props.count; count++) {
       let tempString = "";
       if (!Array.isArray(wavePos[count])) break;
       wavePos[count].forEach((element, index, arr) => {
         if (index === 0) {
-          tempString = tempString.concat(`M0 ${y} L${element.x} ${element.y}`);
+          tempString = tempString.concat(`M0,${y} L${element.x},${element.y}`);
         } else if (index === arr.length - 1) {
-          tempString = tempString.concat(`, L${element.x} ${element.y} L${x} ${y} Z`);
+          tempString = tempString.concat(` L${element.x},${element.y} L${x},${y} Z`);
         } else {
-          tempString = tempString.concat(`, L${element.x} ${element.y}`);
+          tempString = tempString.concat(
+            ` C${assist[count][index - 1].x1},${assist[count][index - 1].y1} ${
+              assist[count][index - 1].x2
+            },${assist[count][index - 1].y2} ${element.x},${element.y}`
+          );
         }
       });
       tempArr[count] = tempString;
@@ -96,7 +126,14 @@ function EX2(props) {
     <g>
       {Array.isArray(waveForm)
         ? waveForm.map((element, index) => {
-            return <path d={element} fill="red" key={index} fillOpacity="0.3" />;
+            return (
+              <path
+                d={element}
+                fill={`hsl(${index * 30}deg, 100%, 50%)`}
+                key={index}
+                fillOpacity="0.5"
+              />
+            );
           })
         : null}
     </g>
