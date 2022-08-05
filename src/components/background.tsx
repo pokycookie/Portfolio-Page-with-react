@@ -8,7 +8,7 @@ export default function Background() {
     <div className="background">
       <svg width={windows.x} height={windows.y}>
         {/* <EX1 windows={windows} /> */}
-        <EX2 windows={windows} count={15} complex={30} />
+        <EX2 windows={windows} count={15} complex={30} contrast={300} />
       </svg>
     </div>
   );
@@ -46,9 +46,15 @@ function EX2(props) {
   const y = props.windows.y;
   const yOffset = 0;
   const waveGap = 50;
-  const contrast = 500;
+  const contrast = props.contrast;
 
   const [waveForm, setWaveForm] = useState([""]);
+  const [wavePos2, setWavePos2] = useState([]);
+  const [assist2, setAssist2] = useState([]);
+
+  useEffect(() => {
+    getRandomPath();
+  }, [props.count, props.complex, props.windows]);
 
   const getRandomPath = () => {
     const wavePos = [];
@@ -61,7 +67,8 @@ function EX2(props) {
         const gap = complex === 0 ? 0 : x / props.complex;
         const max = gap * complex;
         const min = max - gap;
-        const xPos = Math.random() * (max - min) + min;
+        // const xPos = Math.random() * (max - min) + min;
+        const xPos = (max - min) / 2 + min;
         const yPos = yOffset + count * waveGap + Math.random() * contrast;
         wavePos[count].push({ x: Math.floor(xPos), y: Math.floor(yPos) });
         if (complex > 0) {
@@ -90,17 +97,13 @@ function EX2(props) {
       });
       wavePos[count].push({ x: Math.floor(x), y: Math.floor(currentY) });
     }
+    setWavePos2(wavePos);
+    setAssist2(assist);
     pathConcat(wavePos, assist);
-    console.log(assist);
-    console.log(wavePos);
   };
 
-  useEffect(() => {
-    getRandomPath();
-  }, [props]);
-
   const pathConcat = (wavePos, assist) => {
-    const tempArr = [...waveForm];
+    const tempArr = [];
     for (let count = 0; count < props.count; count++) {
       let tempString = "";
       if (!Array.isArray(wavePos[count])) break;
@@ -108,7 +111,11 @@ function EX2(props) {
         if (index === 0) {
           tempString = tempString.concat(`M0,${y} L${element.x},${element.y}`);
         } else if (index === arr.length - 1) {
-          tempString = tempString.concat(` L${element.x},${element.y} L${x},${y} Z`);
+          tempString = tempString.concat(
+            ` C${assist[count][index - 1].x1},${assist[count][index - 1].y1} ${
+              assist[count][index - 1].x2
+            },${assist[count][index - 1].y2} ${element.x},${element.y} L${x},${y} Z`
+          );
         } else {
           tempString = tempString.concat(
             ` C${assist[count][index - 1].x1},${assist[count][index - 1].y1} ${
@@ -136,6 +143,29 @@ function EX2(props) {
             );
           })
         : null}
+      {/* {Array.isArray(wavePos2)
+        ? wavePos2.map((element) => {
+            if (Array.isArray(element)) {
+              return element.map((e, index) => {
+                return <circle key={index} cx={e.x} cy={e.y} r="5" fill="white" />;
+              });
+            }
+          })
+        : null}
+      {Array.isArray(assist2)
+        ? assist2.map((element) => {
+            if (Array.isArray(element)) {
+              return element.map((e, index) => {
+                return (
+                  <g key={index}>
+                    <circle cx={e.x1} cy={e.y1} r="3" fill="blue" />
+                    <circle cx={e.x2} cy={e.y2} r="3" fill="blue" />;
+                  </g>
+                );
+              });
+            }
+          })
+        : null} */}
     </g>
   );
 }
