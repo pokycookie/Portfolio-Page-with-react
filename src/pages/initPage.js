@@ -13,12 +13,7 @@ export default function InitPage() {
         <SvgText>HELLO</SvgText>
       </div>
       <div className="cardArea">
-        <BusinessCard
-          className="front"
-          isFlip={isFlip}
-          setIsFlip={setIsFlip}
-          reverse={true}
-        >
+        <BusinessCard className="front" isFlip={isFlip} setIsFlip={setIsFlip} reverse={true}>
           <div className="top">
             <p>황세웅</p>
             <p>JavaScript 개발자</p>

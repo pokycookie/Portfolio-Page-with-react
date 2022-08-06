@@ -1,4 +1,14 @@
-export default function Column(props) {
+import { ICoord } from "../types";
+
+interface IProps {
+  floor: number;
+  count: number;
+  size: ICoord;
+  className: string;
+  children: JSX.Element;
+}
+
+export default function Column(props: IProps) {
   const f = props.floor;
   const c = props.count;
   const s = props.size.y;
