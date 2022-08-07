@@ -26,7 +26,7 @@ export default function Wave(props: IProps) {
     const height = getHeight();
     setEntryHeight(height);
 
-    const interval = window.setInterval(waveTransition, 5000);
+    const interval = window.setInterval(waveTransition, 3000);
     return () => {
       clearInterval(interval);
     };

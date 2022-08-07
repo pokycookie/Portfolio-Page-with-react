@@ -10,7 +10,9 @@
     left: 0;
     bottom: 0;
     overflow: hidden;
-    transition: all 5s ease-in-out;
+    path {
+      transition: all 5s ease-in-out;
+    }
   }
 
   @keyframes flow {
