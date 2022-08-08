@@ -7,7 +7,7 @@ export default function Background() {
 
   return (
     <div className="background">
-      <EX2 windows={windows} count={10} complex={20} contrast={200} />
+      <EX2 windows={windows} count={4} complex={2} contrast={300} />
     </div>
   );
 }
@@ -57,22 +57,28 @@ function EX2(props: IEX2) {
   const render: JSX.Element[] = [];
   const gap = 50;
   const height = 800;
+  const width = 1000;
 
   for (let count = 0; count < props.count; count++) {
-    render.push(
-      <Wave
-        key={count}
-        width={5000}
-        height={height}
-        windows={props.windows}
-        offset={props.count * gap - count * gap}
-        complexity={props.complex}
-        contrast={props.contrast}
-        color={`hsl(${count * 20}, 100%, 50%)`}
-        opacity={0.5}
-        duration={Math.random() * 10 + 20}
-      />
-    );
+    const entryHeight = height - (props.count * gap - count * gap) - props.contrast * Math.random()
+    for (let i = 0; i < Math.ceil(props.windows.x / width); i++) {
+      render.push(
+        <Wave
+          key={`${count}${i}`}
+          width={width}
+          height={height}
+          windows={props.windows}
+          offset={props.count * gap - count * gap}
+          complexity={props.complex}
+          contrast={props.contrast}
+          color={`hsl(264, ${100 - count * 10}%, 50%)`}
+          opacity={0.6}
+          duration={Math.random() * 10 + 20}
+          left={i * width}
+          entryHeight={entryHeight}
+        />
+      );
+    }
   }
 
   return <div>{render}</div>;

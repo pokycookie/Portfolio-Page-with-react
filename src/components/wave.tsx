@@ -11,10 +11,12 @@ interface IProps {
   color: string;
   duration: number;
   opacity?: number;
+  left: number;
+  entryHeight?: number,
 }
 
 export default function Wave(props: IProps) {
-  const [entryHeight, setEntryHeight] = useState(0);
+  const [entryHeight, setEntryHeight] = useState(props.entryHeight || 0);
   const [path, setPath] = useState("");
 
   const gap = props.width / (props.complexity + 1);
@@ -23,10 +25,11 @@ export default function Wave(props: IProps) {
 
   // Initialize entryHeight
   useEffect(() => {
-    const height = getHeight();
-    setEntryHeight(height);
-
-    const interval = window.setInterval(waveTransition, 3000);
+    if (props.entryHeight === undefined) {
+      const height = getHeight();
+      setEntryHeight(height);
+    }
+    const interval = window.setInterval(waveTransition, Math.random() * 3000);
     return () => {
       clearInterval(interval);
     };
@@ -79,12 +82,15 @@ export default function Wave(props: IProps) {
   };
 
   return (
-    <svg width={props.windows.x} height={props.height}>
+    <svg width={props.windows.x} height={props.height} style={{left: props.left}}>
+      <style>
+        {`@keyframes `}
+      </style>
       <path
         d={path}
         fill={props.color}
         fillOpacity={props.opacity ? props.opacity : 1}
-        style={{ animation: `flow ${props.duration}s infinite alternate` }}
+        // style={{ animation: `flow ${props.duration}s infinite alternate` }}
       />
     </svg>
   );

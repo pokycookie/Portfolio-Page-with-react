@@ -7,11 +7,10 @@
 
   svg {
     position: absolute;
-    left: 0;
     bottom: 0;
     overflow: hidden;
     path {
-      transition: all 5s ease-in-out;
+      transition: all 5s linear;
     }
   }
 
