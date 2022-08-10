@@ -39,6 +39,7 @@ export default function Wave(props: IProps) {
     return () => {
       clearInterval(interval);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Set path

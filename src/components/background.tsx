@@ -7,7 +7,7 @@ export default function Background() {
 
   return (
     <div className="background">
-      <EX2 windows={windows} count={1} complex={4} contrast={300} />
+      <EX2 windows={windows} count={5} complex={3} contrast={200} />
     </div>
   );
 }
@@ -66,7 +66,7 @@ interface IEX2 {
 
 function EX2(props: IEX2) {
   const render: JSX.Element[] = [];
-  const gap = 20;
+  const gap = 50;
   const height = 800;
   const width = 1500;
 
@@ -86,7 +86,7 @@ function EX2(props: IEX2) {
         contrast={props.contrast}
         color={`hsl(264, ${100 - count * 10}%, 50%)`}
         opacity={0.6}
-        repeat={Math.ceil(props.windows.x / width)}
+        repeat={Math.ceil(window.screen.width / width)}
       />
     );
     // }

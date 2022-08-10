@@ -3,5 +3,5 @@
 ## TODO LIST
 
 - [x] Migrating from Javascript to Typescript
-- [ ] Wave SVG (Ocean theme 🌊)
+- [x] Wave SVG (Ocean theme 🌊)
 - [ ] SVG text mask | clippath
