@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useInterval } from "../hooks";
 import { ICoord } from "../types";
 
 interface IProps {
@@ -17,10 +18,7 @@ export default function Wave(props: IProps) {
   const offset = props.offset;
   const contrast = props.contrast;
 
-  const [entryHeight, setEntryHeight] = useState<number>(
-    getHeight(height, offset, contrast)
-  );
-  const [path, setPath] = useState("");
+  const [path, setPath] = useState<string>("");
   const [repeatArr, setRepeatArr] = useState<number[]>([]);
 
   // gap between coord (horizontal)
@@ -28,22 +26,14 @@ export default function Wave(props: IProps) {
   // c1 or c2 position
   const DIFFC = gap / 2;
 
-  // Initialize entryHeight
-  useEffect(() => {
-    const height = getHeight(props.height, offset, contrast);
-    setEntryHeight(height);
-    const interval = window.setInterval(() => {
-      const height = getHeight(props.height, offset, contrast);
-      setEntryHeight(height);
-    }, Math.random() * 2000 + 3000);
-    return () => {
-      clearInterval(interval);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useInterval(() => {
+    getPathString();
+  }, 3000);
 
-  // Set path
-  useEffect(() => {
+  // Set path function
+  const getPathString = useCallback(() => {
+    const entryHeight = getHeight(height, offset, contrast);
+
     let pathString = `M 0 ${props.height} L 0 ${entryHeight} C ${DIFFC} ${entryHeight}`;
 
     for (let complex = 0; complex < props.complexity + 1; complex++) {
@@ -64,7 +54,6 @@ export default function Wave(props: IProps) {
     // Set path state
     setPath(pathString);
   }, [
-    entryHeight,
     DIFFC,
     contrast,
     gap,
@@ -74,6 +63,16 @@ export default function Wave(props: IProps) {
     props.height,
     props.width,
   ]);
+
+  // Initialize entryHeight
+  useEffect(() => {
+    // Start animation immediately
+    setTimeout(() => {
+      getPathString();
+    }, 10);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Change repeat array
   useEffect(() => {
@@ -87,6 +86,11 @@ export default function Wave(props: IProps) {
     }
     setRepeatArr(tempArr);
   }, [props.repeat]);
+
+  // Set path
+  useEffect(() => {
+    getPathString();
+  }, [getPathString]);
 
   return (
     <>
@@ -122,7 +126,7 @@ export default function Wave(props: IProps) {
 
 // Get random height
 const getHeight = (height: number, offset: number, contrast: number) => {
-  return height - offset - contrast * Math.random();
+  return offset + contrast * Math.random();
 };
 
 // Concat path string

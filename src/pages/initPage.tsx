@@ -1,11 +1,15 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import Background from "../components/background";
 import BusinessCard from "../components/businessCard";
 import SvgText from "../components/svgText";
 
 export default function InitPage() {
   const [isFlip, setIsFlip] = useState(false);
+  const [dive, setDive] = useState<boolean>(false);
+
+  const diveHandler = () => {
+    setDive((prev) => (prev ? false : true));
+  };
 
   return (
     <div className="initPage">
@@ -13,7 +17,12 @@ export default function InitPage() {
         <SvgText>HELLO</SvgText>
       </div>
       <div className="cardArea">
-        <BusinessCard className="front" isFlip={isFlip} setIsFlip={setIsFlip} reverse={true}>
+        <BusinessCard
+          className="front"
+          isFlip={isFlip}
+          setIsFlip={setIsFlip}
+          reverse={true}
+        >
           <div className="top">
             <p>황세웅</p>
             <p>JavaScript 개발자</p>
@@ -41,10 +50,10 @@ export default function InitPage() {
           <p></p>
         </BusinessCard>
       </div>
-      <Link to="/Portfolio-Page-with-react/introduce" className="introBtn">
-        START
-      </Link>
-      <Background />
+      <button className="introBtn" onClick={diveHandler}>
+        DIVE!
+      </button>
+      <Background dive={dive} />
     </div>
   );
 }
