@@ -2,6 +2,7 @@ import { useState } from "react";
 import Background from "../components/background";
 import BusinessCard from "../components/businessCard";
 import SvgText from "../components/svgText";
+import submarine from "../img/submarine.svg";
 
 export default function InitPage() {
   const [isFlip, setIsFlip] = useState(false);
@@ -53,6 +54,13 @@ export default function InitPage() {
       <button className="introBtn" onClick={diveHandler}>
         DIVE!
       </button>
+      <img
+        className="submarine"
+        src={submarine}
+        alt="submarine"
+        width={400}
+        height={400}
+      />
       <Background dive={dive} />
     </div>
   );
