@@ -44,7 +44,7 @@ function Waves(props: IWavesProps) {
         key={count}
         width={width}
         height={height}
-        offset={props.dive ? 0 : offset}
+        offset={props.dive ? -200 : offset}
         complexity={props.complex}
         contrast={props.contrast}
         color={`hsl(264, ${100 - count * 10}%, 50%)`}

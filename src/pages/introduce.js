@@ -16,7 +16,7 @@ import EmptyHexagon from "../components/emptyHexagon";
 const SCROLL_LEN = 2000;
 const COLUMN_LEN = 5;
 
-export default function Introduce() {
+export default function Introduce(props) {
   const [scroll, setScroll] = useState(0);
   const [floor, setFloor] = useState(1);
   const [size, setSize] = useState({
@@ -53,7 +53,10 @@ export default function Introduce() {
   }, []);
 
   return (
-    <div className="introducePage" style={{ width: size.x, height: SCROLL_LEN * (COLUMN_LEN + 1) }}>
+    <div
+      className="introducePage"
+      style={{ width: size.x, height: SCROLL_LEN * (COLUMN_LEN + 1) }}
+    >
       <Column size={size} floor={floor} count={1} className="about">
         <p>About Me</p>
       </Column>
@@ -137,7 +140,12 @@ export default function Introduce() {
       <Column size={size} floor={floor} count={5} className="">
         5
       </Column>
-      <ColumnNav count={COLUMN_LEN} size={size} floor={floor} moveScroll={moveScroll} />
+      <ColumnNav
+        count={COLUMN_LEN}
+        size={size}
+        floor={floor}
+        moveScroll={moveScroll}
+      />
     </div>
   );
 }

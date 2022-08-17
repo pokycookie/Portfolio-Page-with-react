@@ -1,16 +1,16 @@
 import { useState } from "react";
-import Background from "../components/background";
 import BusinessCard from "../components/businessCard";
 import SvgText from "../components/svgText";
-import submarine from "../img/submarine.svg";
 
-export default function InitPage() {
+import { TPage } from "../types";
+
+interface IProps {
+  setPage: React.Dispatch<React.SetStateAction<TPage>>;
+  diveHandler: () => void;
+}
+
+export default function InitPage(props: IProps) {
   const [isFlip, setIsFlip] = useState(false);
-  const [dive, setDive] = useState<boolean>(false);
-
-  const diveHandler = () => {
-    setDive((prev) => (prev ? false : true));
-  };
 
   return (
     <div className="initPage">
@@ -26,7 +26,7 @@ export default function InitPage() {
         >
           <div className="top">
             <p>황세웅</p>
-            <p>JavaScript 개발자</p>
+            <p>JavaScript(+TypeScript) 개발자</p>
           </div>
           <div className="bottom">
             <a
@@ -51,17 +51,9 @@ export default function InitPage() {
           <p></p>
         </BusinessCard>
       </div>
-      <button className="introBtn" onClick={diveHandler}>
+      <button className="introBtn" onClick={props.diveHandler}>
         DIVE!
       </button>
-      <img
-        className="submarine"
-        src={submarine}
-        alt="submarine"
-        width={400}
-        height={400}
-      />
-      <Background dive={dive} />
     </div>
   );
 }
