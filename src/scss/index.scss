@@ -1,18 +1,7 @@
 @import "reset.scss";
-@import "businessCard.scss";
-@import "initPage.scss";
-@import "background.scss";
-@import "introduce.scss";
-
-$color-white: #fdf6ec;
-$color-skyBlue: #b7cadb;
-$color-clearBrown: #f3e9dd;
-$color-darkBrown: #dab88b;
-$color-brown: #e6d5b8;
 
 body {
   background-color: white;
-  overflow: hidden;
   &::-webkit-scrollbar {
     width: 0px;
     height: 0px;
@@ -29,26 +18,12 @@ body {
 
 .App {
   width: 100%;
-  height: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
-  position: relative;
-
-  .submarine {
-    position: absolute;
-    bottom: 150px;
-    left: calc(50% - 200px);
-    z-index: -2;
-    animation: submarineWave 5s alternate infinite ease-in-out;
-  }
 }
 
-@keyframes submarineWave {
-  0% {
-    transform: translateY(20px) rotate(5deg);
-  }
-  100% {
-    transform: translateY(-20px) rotate(-5deg);
-  }
+._section {
+  width: 100vw;
 }

@@ -1,6 +1,7 @@
 import { useWindows } from "../hooks";
 import { ICoord } from "../types";
 import Wave from "./wave";
+import "../scss/background.scss";
 
 interface IProps {
   dive?: boolean;

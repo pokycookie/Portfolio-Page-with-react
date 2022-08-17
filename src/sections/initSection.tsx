@@ -1,16 +1,16 @@
 import { useState } from "react";
 import BusinessCard from "../components/businessCard";
 import SvgText from "../components/svgText";
+import submarine from "../img/submarine.svg";
+import Background from "../components/background";
+import "../scss/initSection.scss";
+import "../scss/submarine.scss";
 
-interface IProps {
-  diveHandler: () => void;
-}
-
-export default function InitPage(props: IProps) {
+export default function InitSection() {
   const [isFlip, setIsFlip] = useState(false);
 
   return (
-    <div className="initPage">
+    <div className="initSection _section">
       <div className="textArea">
         <SvgText>HELLO</SvgText>
       </div>
@@ -48,9 +48,15 @@ export default function InitPage(props: IProps) {
           <p></p>
         </BusinessCard>
       </div>
-      <button className="introBtn" onClick={props.diveHandler}>
-        DIVE!
-      </button>
+      <button className="introBtn">DIVE!</button>
+      <img
+        className="submarine"
+        src={submarine}
+        alt="submarine"
+        width={400}
+        height={400}
+      />
+      <Background />
     </div>
   );
 }

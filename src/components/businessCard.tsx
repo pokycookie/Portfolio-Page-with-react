@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useWindows } from "../hooks";
 import { ICoord } from "../types";
+import "../scss/businessCard.scss";
 
 interface IProps {
   reverse?: boolean;
