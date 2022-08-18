@@ -11,9 +11,6 @@ export default function InitPage(props: IProps) {
 
   return (
     <div className="initPage">
-      <div className="textArea">
-        <SvgText>HELLO</SvgText>
-      </div>
       <div className="cardArea">
         <BusinessCard
           className="front"

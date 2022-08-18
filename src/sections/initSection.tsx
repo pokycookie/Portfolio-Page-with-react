@@ -3,16 +3,18 @@ import BusinessCard from "../components/businessCard";
 import SvgText from "../components/svgText";
 import submarine from "../img/submarine.svg";
 import Background from "../components/background";
-import "../scss/initSection.scss";
-import "../scss/submarine.scss";
+import "../scss/sections/initSection.scss";
+import "../scss/components/submarine.scss";
+import { useWindowSize } from "../hooks";
 
 export default function InitSection() {
   const [isFlip, setIsFlip] = useState(false);
+  const windowSize = useWindowSize();
 
   return (
     <div className="initSection _section">
       <div className="textArea">
-        <SvgText>HELLO</SvgText>
+        <SvgText width={windowSize.x}>Cookie's Portfolio</SvgText>
       </div>
       <div className="cardArea">
         <BusinessCard

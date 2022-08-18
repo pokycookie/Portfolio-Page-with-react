@@ -1,8 +1,9 @@
 import { useEffect, useRef } from "react";
 import { useState } from "react";
+import { ICoord } from "./types";
 
-export function useWindows() {
-  const [size, setSize] = useState({ x: 1, y: 1 });
+export function useWindowSize(): ICoord {
+  const [size, setSize] = useState<ICoord>({ x: 1, y: 1 });
 
   const handleResize = () => {
     setSize({

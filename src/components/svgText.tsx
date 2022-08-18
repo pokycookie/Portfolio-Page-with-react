@@ -1,6 +1,11 @@
-export default function SvgText(props) {
+interface IProps {
+  children: string;
+  width: number;
+}
+
+export default function SvgText(props: IProps) {
   return (
-    <svg width="500" height="100">
+    <svg width={props.width} height="100">
       <defs>
         <clipPath id="circle">
           <circle cx="50%" cy="30%" r="80" />

@@ -1,14 +1,14 @@
-import { useWindows } from "../hooks";
+import { useWindowSize } from "../hooks";
 import { ICoord } from "../types";
 import Wave from "./wave";
-import "../scss/background.scss";
+import "../scss/components/background.scss";
 
 interface IProps {
   dive?: boolean;
 }
 
 export default function Background(props: IProps) {
-  const windows: ICoord = useWindows();
+  const windows: ICoord = useWindowSize();
 
   return (
     <div className="background">

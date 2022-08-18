@@ -1,9 +1,10 @@
 .submarine {
-  position: absolute;
+  position: fixed;
   bottom: 150px;
   left: calc(50% - 200px);
   z-index: -2;
   animation: submarineWave 5s alternate infinite ease-in-out;
+  transition: all 1s ease-in-out;
 }
 
 @keyframes background {

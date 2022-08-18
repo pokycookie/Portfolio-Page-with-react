@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useWindows } from "../hooks";
+import { useWindowSize } from "../hooks";
 import { ICoord } from "../types";
-import "../scss/businessCard.scss";
+import "../scss/components/businessCard.scss";
 
 interface IProps {
   reverse?: boolean;
@@ -13,7 +13,7 @@ interface IProps {
 
 export default function BusinessCard(props: IProps) {
   const [offset, setOffset] = useState<ICoord | null>(null);
-  const windows: ICoord = useWindows();
+  const windows: ICoord = useWindowSize();
 
   const onMouseMove = (e: globalThis.MouseEvent) => {
     const result = { x: e.clientX, y: e.clientY };
